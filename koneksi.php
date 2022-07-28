@@ -34,7 +34,7 @@ function Registrasi()
                     '" . $_POST['username'] . "',
                     '" . $password . "',
                     '$idmember',
-                    '1',
+                    '2',
                     '1',
                     '" . $date . "')";
     $query_inserts = mysqli_query($con, $sql_insert) or die(mysqli_connect_error());
@@ -270,6 +270,14 @@ function deleteMotor($id)
 }
 
 function part()
+{
+    global $con;
+    $sql = "SELECT * FROM spare_part a, brand b WHERE a.id_brand=b.id";
+    $query = mysqli_query($con, $sql);
+    return $query;
+}
+
+function partMotor()
 {
     global $con;
     $sql = "SELECT * FROM spare_part a, brand b WHERE a.id_brand=b.id";
@@ -936,5 +944,65 @@ function deleteUser($id)
     } else {
         echo "<script>alert('Hapus Gagal')</script>";
         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=user'>";
+    }
+}
+
+function insertPerbaikan()
+{
+    global $con;
+
+    $idperbaikan = "SELECT `AUTO_INCREMENT` as id_perbaikan FROM INFORMATION_SCHEMA.TABLES
+    WHERE TABLE_SCHEMA = 'bengkel' AND TABLE_NAME = 'perbaikan' ";
+    $querys = mysqli_query($con, $idperbaikan);
+    $rows = mysqli_fetch_row($querys);
+    $idp = $rows[0];
+    $a = $_POST['is_part'];
+    $harga = $_POST['harga'];
+    $b = $_POST['jumlah'];
+    
+    foreach ($a as $part) {
+        echo '<pre>';
+        var_dump($a);
+        echo '</pre>';
+    }
+
+    // foreach ($a as $part) {
+    //     echo '<pre>';
+    //     var_dump($b);
+    //     echo '</pre>';
+    // }
+    
+    die();
+    
+    $sqlpart = "INSERT INTO `part_perbaikan`(`id_perbaikan`,`id_part`,`jumlah`, `harga`) VALUES (
+        '" . $idp . "',
+        '" . $a . "',
+        '" . $b . "',
+        '" . $harga . "'
+    )";
+
+    // $count = "SELECT (`jumlah` * `harga`) as `tothar`  FROM `part_perbaikan` WHERE `id_perbaikan` = '$idp' ";
+    $count = "SELECT sum(`jumlah`*`harga`) as `total` FROM `part_perbaikan` WHERE `id_perbaikan` = '$idp' GROUP BY `id_perbaikan`;";
+    $hrg = mysqli_query($con, $count);
+    $res = mysqli_fetch_row($hrg);
+    $total = $res[0];
+
+    $date = date("Y-m-d H:i:s");
+
+    $sqlperbaikan = "INSERT INTO `perbaikan`(`id_antrian`,`id_member`,`id_karyawan`, `total_perbaikan`, `is_clear`, `is_input`) VALUES (
+        '" . $_POST['id_antrian'] . "',
+        '" . $_POST['id_member'] . "',
+        '" . $_POST['id_karyawan'] . "',
+        '" . $total . "',
+        '" . $_POST['is_clear'] . "',
+        '" . $date . "'
+    )";
+
+    if ($sqlpart && $sqlperbaikan) {
+        echo "<script>alert('Rekap Perbaikan Berhasil Ditambahkan !')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
+    } else {
+        echo "<script>alert('Rekap Perbaikan Gagal Ditambahkan !')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
     }
 }

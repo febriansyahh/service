@@ -9,7 +9,7 @@ include_once("koneksi.php");
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <form action="?v=book_aksi" method="post" enctype="multipart/form-data">
+        <form action="?v=rekap_aksi" method="post" enctype="multipart/form-data">
                 <div class="form-group mb-4">
                     <label for="">Member</label>
                     <select class="form-select" name="member" id="member" onchange="showMember(this.value)" aria-label="Default select example" required>

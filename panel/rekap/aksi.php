@@ -2,9 +2,7 @@
 include_once("__DIR__ .  ../../koneksi.php");
 
 if (isset($_POST['btnSimpan'])) {
-    insertBook();
-} elseif (isset($_POST['btnSelesai'])) {
-    clearBook();
+    insertPerbaikan();
 } elseif (isset($_POST['btnUbah'])) {
     updateBook();
 } else {
