@@ -49,8 +49,8 @@ switch ($data_level) {
                                     ?>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editBrand" onclick="editableBooking(this)" data-id="<?php echo $data['id_antrian'] . "~" . $data['id_member'] . "~" . $data['no_antrian'] . "~" . $data['tanggal'] . "~" . $data['keluhan'] . "~" . $data['status'] . "~" . $data['nama'] . "~" . $data['nm_motor'] . "~" . $data['id'] . "~" . $data['id_motor']  ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
-                                    <a href="?v=book_aksi&kode=<?php echo $data['id']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
+                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editBrand" onclick="editableBooking(this)" data-id="<?php echo $data['id_antrian'] . "~" . $data['id_member'] . "~" . $data['no_antrian'] . "~" . $data['tanggal'] . "~" . $data['keluhan'] . "~" . $data['status'] . "~" . $data['nama'] . "~" . $data['nm_motor'] . "~" . $data['id'] . "~" . $data['id_motor']  ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                    <a href="?v=book_aksi&kode=<?php echo $data['id']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         <?php
