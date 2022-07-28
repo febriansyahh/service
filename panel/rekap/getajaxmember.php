@@ -77,7 +77,7 @@ if ($id != 0) {
         <div class="col-3">
             <div class="form-group">
                 <label for="">Tgl. Perbaikan</label>
-                <input type="date" name="tanggal" class="form-control" required>
+                <input type="date" name="is_clear" class="form-control" required>
             </div>
         </div>
 
@@ -121,7 +121,7 @@ if ($id != 0) {
         ?>
             <div class="col-md-4">
                 <div class="input-group mb-3">
-                    <label for=""><?= $value['nm_part'] ?></label>
+                    <label for=""><?= $value['nm_part'] ?> &nbsp;</label>
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input">
@@ -129,7 +129,7 @@ if ($id != 0) {
                     </div>
                     <input type="hidden" class="form-control" name="is_part[]" value="<?= $value['id_part']  ?>">
                     <input type="hidden" class="form-control" name="harga[]" value="<?= $value['harga'] ?>">
-                    <input type="text" name="jumlah[]" class="form-control" aria-label="Text input with checkbox">
+                    <input type="text" name="jumlah[]" class="form-control" value="0" aria-label="Text input with checkbox">
                 </div>
             </div>
         <?php

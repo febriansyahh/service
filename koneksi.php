@@ -960,28 +960,29 @@ function insertPerbaikan()
     $harga = $_POST['harga'];
     $b = $_POST['jumlah'];
     
-    foreach ($a as $part) {
-        echo '<pre>';
-        var_dump($a);
-        echo '</pre>';
-    }
+    $cp = count($a);
 
-    // foreach ($a as $part) {
-    //     echo '<pre>';
-    //     var_dump($b);
-    //     echo '</pre>';
-    // }
-    
-    die();
-    
-    $sqlpart = "INSERT INTO `part_perbaikan`(`id_perbaikan`,`id_part`,`jumlah`, `harga`) VALUES (
+    for ($i=0; $i < $cp ; $i++) { 
+        $a = $_POST['is_part'];
+        $b = $_POST['harga'];
+        $c = $_POST['jumlah'];
+        
+        $part = $a[$i];
+        $hrg = $b[$i];
+        $jml = $c[$i];
+        $res =(int)$hrg * (int)$jml;
+
+        $sqlpart = "INSERT INTO `part_perbaikan`(`id_perbaikan`,`id_part`,`jumlah`, `harga`) VALUES (
         '" . $idp . "',
-        '" . $a . "',
-        '" . $b . "',
-        '" . $harga . "'
-    )";
+        '" . $part . "',
+        '" . $jml . "',
+        '" . $hrg . "'
+        )";
 
-    // $count = "SELECT (`jumlah` * `harga`) as `tothar`  FROM `part_perbaikan` WHERE `id_perbaikan` = '$idp' ";
+        mysqli_query($con, $sqlpart);
+
+    }
+    
     $count = "SELECT sum(`jumlah`*`harga`) as `total` FROM `part_perbaikan` WHERE `id_perbaikan` = '$idp' GROUP BY `id_perbaikan`;";
     $hrg = mysqli_query($con, $count);
     $res = mysqli_fetch_row($hrg);
@@ -998,7 +999,9 @@ function insertPerbaikan()
         '" . $date . "'
     )";
 
-    if ($sqlpart && $sqlperbaikan) {
+    $query = mysqli_query($con, $sqlperbaikan);
+
+    if ($query) {
         echo "<script>alert('Rekap Perbaikan Berhasil Ditambahkan !')</script>";
         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
     } else {
