@@ -957,8 +957,8 @@ function insertPerbaikan()
     $rows = mysqli_fetch_row($querys);
     $idp = $rows[0];
     $a = $_POST['is_part'];
-    $harga = $_POST['harga'];
-    $b = $_POST['jumlah'];
+    // $harga = $_POST['harga'];
+    // $b = $_POST['jumlah'];
     
     $cp = count($a);
 
@@ -998,6 +998,69 @@ function insertPerbaikan()
         '" . $_POST['is_clear'] . "',
         '" . $date . "'
     )";
+
+    $query = mysqli_query($con, $sqlperbaikan);
+
+    if ($query) {
+        echo "<script>alert('Rekap Perbaikan Berhasil Ditambahkan !')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
+    } else {
+        echo "<script>alert('Rekap Perbaikan Gagal Ditambahkan !')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
+    }
+
+}
+    function updatePerbaikan()
+{
+    global $con;
+    $idp = $_POST['id_perbaikan'];
+    $a = $_POST['is_part'];
+    // $harga = $_POST['harga'];
+    // $b = $_POST['jumlah'];
+
+    
+
+    $cp = count($a);
+
+    for ($i = 0; $i < $cp; $i++) {
+        $a = $_POST['is_part'];
+        $b = $_POST['harga'];
+        $c = $_POST['jumlah'];
+
+        $part = $a[$i];
+        $hrg = $b[$i];
+        $jml = $c[$i];
+        $res = (int)$hrg * (int)$jml;
+
+        $sqlpart = "INSERT INTO `part_perbaikan`(`id_perbaikan`,`id_part`,`jumlah`, `harga`) VALUES (
+        '" . $idp . "',
+        '" . $part . "',
+        '" . $jml . "',
+        '" . $hrg . "'
+        )";
+
+        mysqli_query($con, $sqlpart);
+    }
+
+    $count = "SELECT sum(`jumlah`*`harga`) as `total` FROM `part_perbaikan` WHERE `id_perbaikan` = '$idp' GROUP BY `id_perbaikan`;";
+    $hrg = mysqli_query($con, $count);
+    $res = mysqli_fetch_row($hrg);
+    $total = $res[0];
+
+    $sql = "UPDATE `user` SET 
+    `password` = '" . $password . "'
+    WHERE `id_user` = '" . $_POST['id'] . "' ";
+    $query_ubah = mysqli_query($con, $sql);
+
+    $date = date("Y-m-d H:i:s");
+
+    $sqlperbaikan = "UPDATE `perbaikan` SET 
+    `id_antrian` =  '" . $_POST['id_antrian'] . "',
+    `id_member` = '" . $_POST['id_member'] . "',
+    `id_karyawan` = '" . $_POST['id_karyawan'] . "'
+    `total_perbaikan` =  '" . $total . "',
+    `is_clear` =    '" . $_POST['is_clear'] . "'
+    WHERE `id_perbaikan` = '" . $_POST['id'] ."' ";
 
     $query = mysqli_query($con, $sqlperbaikan);
 
