@@ -563,7 +563,8 @@ function deleteJobdesk($id)
 function getBook()
 {
     global $con;
-    $sql = "SELECT a.*, c.nama, c.no_hp, b.id_motor, b.nm_motor, d.id, d.nm_brand FROM antrian a, motor b, member c, brand d WHERE a.id_motor=b.id_motor AND a.id_member=c.id_member AND b.id_brand=d.id AND a.status='1' ORDER BY a.tanggal, a.no_antrian ASC";
+    // $sql = "SELECT a.*, c.nama, c.no_hp, b.id_motor, b.nm_motor, d.id, d.nm_brand FROM antrian a, motor b, member c, brand d WHERE a.id_motor=b.id_motor AND a.id_member=c.id_member AND b.id_brand=d.id AND a.status='1' ORDER BY a.tanggal, a.no_antrian ASC";
+    $sql = "SELECT a.*, c.nama, c.no_hp, b.id_motor, b.nm_motor, d.id, d.nm_brand FROM antrian a, motor b, member c, brand d WHERE a.id_motor=b.id_motor AND a.id_member=c.id_member AND b.id_brand=d.id ORDER BY a.tanggal, a.no_antrian ASC";
     $query = mysqli_query($con, $sql);
     return $query;
 }
@@ -573,7 +574,8 @@ function getBooking()
     global $con;
     $id_member = $_SESSION["ses_id_person"];
 
-    $sql = "SELECT a.*, c.nama, c.no_hp, b.id_motor, b.nm_motor, d.id, d.nm_brand FROM antrian a, motor b, member c, brand d WHERE a.id_motor=b.id_motor AND a.id_member=c.id_member AND b.id_brand=d.id AND a.status='1' AND a.id_member='$id_member' ORDER BY a.tanggal, a.no_antrian ASC";
+    $sql = "SELECT a.*, c.nama, c.no_hp, b.id_motor, b.nm_motor, d.id, d.nm_brand FROM antrian a, motor b, member c, brand d WHERE a.id_motor=b.id_motor AND a.id_member=c.id_member AND b.id_brand=d.id  AND a.id_member='$id_member' ORDER BY a.tanggal, a.no_antrian ASC";
+    // $sql = "SELECT a.*, c.nama, c.no_hp, b.id_motor, b.nm_motor, d.id, d.nm_brand FROM antrian a, motor b, member c, brand d WHERE a.id_motor=b.id_motor AND a.id_member=c.id_member AND b.id_brand=d.id AND a.status='1' AND a.id_member='$id_member' ORDER BY a.tanggal, a.no_antrian ASC";
     $query = mysqli_query($con, $sql);
     return $query;
 }
