@@ -634,25 +634,37 @@ function insertBooking()
         $rows = mysqli_fetch_row($cekquery);
         $noantrian = $rows[0] + 1;
 
+        $ceklimit = "SELECT `limit_antri` AS la FROM `limit_antri` ";
+        $ceking = mysqli_query($con, $ceklimit);
+        $res = mysqli_fetch_array($ceking);
+        
+        $limithari = $res[0];
 
-        $sql = "INSERT INTO `antrian`(`id_member`, `id_motor`, `no_antrian`, `tanggal`, `keluhan`, `status`, `submitted`) VALUES (
-        '" . $_SESSION["ses_id_person"] . "',
-        '" . $_POST['motor'] . "',
-        '" . $noantrian . "',
-        '" . $_POST['tanggal'] . "',
-        '" . $_POST['keluhan'] . "',
-        '1',
-        '" . $date . "')";
-        $query = mysqli_query($con, $sql) or die(mysqli_connect_error());
-
-
-        if ($query) {
-            echo "<script>alert('Booking Service Berhasil')</script>";
+        if ($noantrian > $limithari) {
+            $tgll = date(strtotime("d-m-Y", $post_date));
+            echo "<script>alert('Maaf booking antrian untuk tanggal $tgll sudah penuh !')</script>";
             echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
-        } else {
-            echo "<script>alert('Booking Service Gagal')</script>";
-            echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
+        }else{
+            $sql = "INSERT INTO `antrian`(`id_member`, `id_motor`, `no_antrian`, `tanggal`, `keluhan`, `status`, `submitted`) VALUES (
+                '" . $_SESSION["ses_id_person"] . "',
+                '" . $_POST['motor'] . "',
+                '" . $noantrian . "',
+                '" . $_POST['tanggal'] . "',
+                '" . $_POST['keluhan'] . "',
+                '1',
+                '" . $date . "')";
+            $query = mysqli_query($con, $sql) or die(mysqli_connect_error());
+
+
+            if ($query) {
+                echo "<script>alert('Booking Service Berhasil')</script>";
+                echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
+            } else {
+                echo "<script>alert('Booking Service Gagal')</script>";
+                echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
+            }
         }
+        
     }else{
         echo "<script>alert('Data booking anda sudah ada, Lakukan booking kembali setelah antrian selesai')</script>";
         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
@@ -660,84 +672,84 @@ function insertBooking()
 
 }
 
-// function clearBook()
-// {
-//     global $con;
-//     $date = date("Y-m-d H:i:s");
-
-//     $sql = "UPDATE `antrian` SET 
-//     `status` = '2',
-//     `clear_at` = '$date'
-//     WHERE `id_antrian` = '" . $_POST['id'] . "' ";
-//     $query_ubah = mysqli_query($con, $sql);
-
-//     if ($query_ubah) {
-//         echo "<script>alert('Konfirmasi Berhasil')</script>";
-//         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
-//     } else {
-//         echo "<script>alert('Konfirmasi Gagal')</script>";
-//         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
-//     }
-// }
-
 function clearBook()
 {
     global $con;
     $date = date("Y-m-d H:i:s");
 
-    $member = $_POST['member'];
-    $id = $_POST['id'];
-    $sql_no = "SELECT no_hp FROM member WHERE id_member = '$member'";
-    $query_no = mysqli_query($con, $sql_no);
+    $sql = "UPDATE `antrian` SET 
+    `status` = '2',
+    `clear_at` = '$date'
+    WHERE `id_antrian` = '" . $_POST['id'] . "' ";
+    $query_ubah = mysqli_query($con, $sql);
 
-    $cek = "SELECT * FROM `antrian` WHERE `id_member` = '$id'";
-    $query = mysqli_query($con, $cek);
-    $row = mysqli_fetch_row($query);
-
-    $textt = "Kepada member bengkel Dandi Motor Jaya, antrian service motor anda dengan detail data :";
-    $rplc = str_replace(' ', '%20', $textt);
-
-    foreach ($query_no as $value) {
-        $curl = curl_init();
-
-        $noWa = $value['noWa'];
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://panel.rapiwha.com/send_message.php?apikey=BVHKMPMKEXZZ0O0GHO2T&number=$noWa&text=$rplc",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-        ));
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            $sql = "UPDATE `antrian` SET 
-            `status` = '2',
-            `clear_at` = '$date'
-            WHERE `id_antrian` = '" . $_POST['id'] . "' ";
-            $query_ubah = mysqli_query($con, $sql);
-
-            $query_validasi = mysqli_query($con, $query_ubah);
-
-            if ($query_validasi) {
-                echo "<script>alert('Validasi Berhasil')</script>";
-                echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
-            } else {
-                echo "<script>alert('Validasi Gagal')</script>";
-                echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
-            }
-        }
+    if ($query_ubah) {
+        echo "<script>alert('Konfirmasi Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
+    } else {
+        echo "<script>alert('Konfirmasi Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
     }
 }
+
+// function clearBook()
+// {
+//     global $con;
+//     $date = date("Y-m-d H:i:s");
+
+//     $member = $_POST['member'];
+//     $id = $_POST['id'];
+//     $sql_no = "SELECT no_hp FROM member WHERE id_member = '$member'";
+//     $query_no = mysqli_query($con, $sql_no);
+
+//     $cek = "SELECT * FROM `antrian` WHERE `id_member` = '$id'";
+//     $query = mysqli_query($con, $cek);
+//     $row = mysqli_fetch_row($query);
+
+//     $textt = "Kepada member bengkel Dandi Motor Jaya, antrian service motor anda dengan detail data :";
+//     $rplc = str_replace(' ', '%20', $textt);
+
+//     foreach ($query_no as $value) {
+//         $curl = curl_init();
+
+//         $noWa = $value['noWa'];
+
+//         curl_setopt_array($curl, array(
+//             CURLOPT_URL => "https://panel.rapiwha.com/send_message.php?apikey=BVHKMPMKEXZZ0O0GHO2T&number=$noWa&text=$rplc",
+//             CURLOPT_RETURNTRANSFER => true,
+//             CURLOPT_ENCODING => "",
+//             CURLOPT_MAXREDIRS => 10,
+//             CURLOPT_TIMEOUT => 30,
+//             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//             CURLOPT_CUSTOMREQUEST => "GET",
+//         ));
+
+//         $response = curl_exec($curl);
+//         $err = curl_error($curl);
+
+//         curl_close($curl);
+
+//         if ($err) {
+//             echo "cURL Error #:" . $err;
+//         } else {
+//             $sql = "UPDATE `antrian` SET 
+//             `status` = '2',
+//             `clear_at` = '$date'
+//             WHERE `id_antrian` = '" . $_POST['id'] . "' ";
+//             $query_ubah = mysqli_query($con, $sql);
+
+//             $query_validasi = mysqli_query($con, $query_ubah);
+
+//             if ($query_validasi) {
+//                 echo "<script>alert('Validasi Berhasil')</script>";
+//                 echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
+//             } else {
+//                 echo "<script>alert('Validasi Gagal')</script>";
+//                 echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
+//             }
+//         }
+//     }
+// }
 
 function updateBook()
 {
@@ -788,7 +800,7 @@ function profile()
 function rekap_service_admin()
 {
     global $con;
-    $sql = "SELECT  a.*, b.tanggal, b.keluhan, d.nama, d.no_hp, c.nm_motor, e.nama FROM perbaikan a, antrian b, motor c, member d, karyawan e WHERE a.id_antrian=b.id_antrian AND b.id_motor=c.id_motor AND b.id_member=d.id_member AND  a.id_karyawan=e.id_karyawan";
+    $sql = "SELECT  a.*, b.tanggal, b.keluhan, d.nama, d.no_hp, c.nm_motor, c.id_brand, e.nama FROM perbaikan a, antrian b, motor c, member d, karyawan e WHERE a.id_antrian=b.id_antrian AND b.id_motor=c.id_motor AND b.id_member=d.id_member AND  a.id_karyawan=e.id_karyawan";
     $query = mysqli_query($con, $sql);
     return $query;
 }
@@ -917,11 +929,6 @@ function resetPassword()
     WHERE `id_user` = '" . $_POST['id'] . "' ";
     $query_ubah = mysqli_query($con, $sql);
 
-    // $sql = "UPDATE `user` SET 
-    // `password` = '" . $_POST['password'] . "'
-    // WHERE `id_user` = '" . $_POST['id'] . "' ";
-    // $query_ubah = mysqli_query($con, $sql);
-
     if ($query_ubah) {
         echo "<script>alert('Ubah Berhasil')</script>";
         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=user'>";
@@ -1010,15 +1017,20 @@ function insertPerbaikan()
     }
 
 }
-    function updatePerbaikan()
+
+function limit()
+{
+    global $con;
+
+    $sql = "SELECT * FROM limit_antri";
+    $query  = mysqli_query($con, $sql);
+    return $query;
+}
+    function tambahPart()
 {
     global $con;
     $idp = $_POST['id_perbaikan'];
     $a = $_POST['is_part'];
-    // $harga = $_POST['harga'];
-    // $b = $_POST['jumlah'];
-
-    
 
     $cp = count($a);
 
@@ -1047,20 +1059,10 @@ function insertPerbaikan()
     $res = mysqli_fetch_row($hrg);
     $total = $res[0];
 
-    $sql = "UPDATE `user` SET 
-    `password` = '" . $password . "'
-    WHERE `id_user` = '" . $_POST['id'] . "' ";
-    $query_ubah = mysqli_query($con, $sql);
-
-    $date = date("Y-m-d H:i:s");
-
+ 
     $sqlperbaikan = "UPDATE `perbaikan` SET 
-    `id_antrian` =  '" . $_POST['id_antrian'] . "',
-    `id_member` = '" . $_POST['id_member'] . "',
-    `id_karyawan` = '" . $_POST['id_karyawan'] . "'
-    `total_perbaikan` =  '" . $total . "',
-    `is_clear` =    '" . $_POST['is_clear'] . "'
-    WHERE `id_perbaikan` = '" . $_POST['id'] ."' ";
+    `total_perbaikan` =  '" . $total . "'
+    WHERE `id_perbaikan` = '" . $_POST['id_perbaikan'] ."' ";
 
     $query = mysqli_query($con, $sqlperbaikan);
 
@@ -1069,6 +1071,32 @@ function insertPerbaikan()
         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
     } else {
         echo "<script>alert('Rekap Perbaikan Gagal Ditambahkan !')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
+    }
+}
+
+function partperbaikan($id)
+{
+    global $con;
+    $sql = "SELECT * FROM `spare_part` WHERE `status` = '1' AND `id_brand` = '$id' ";
+    $query = mysqli_query($con, $sql);
+    return $query;
+}
+
+function deletePerbaikan($id)
+{
+    global $con;
+    $sql = "DELETE FROM `perbaikan` WHERE `id_perbaikan` = '". $id ."'";
+    $query = mysqli_query($con, $sql);
+
+    $sqla = "DELETE FROM `part_perbaikan` WHERE `id_perbaikan` = '". $id ."'";
+    $querya = mysqli_query($con, $sqla);
+
+    if ($query && $querya) {
+        echo "<script>alert('Data Rekap Perbaikan Berhasil Dihapus !')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
+    }else{
+        echo "<script>alert('Data Rekap Perbaikan Gagal Dihapus !')</script>";
         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
     }
 }

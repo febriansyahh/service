@@ -28,6 +28,15 @@ $(document).ready(function () {
 //     }
 // }
 
+function editableLimit(param) {
+  let data = $(param).data("id");
+  let exp = data.split("~");
+  console.log(data);
+  console.log(exp[1]);
+  $("#editId").val(exp[0]);
+  $("#editLimit").val(exp[1]);
+}
+
 function editableBrand(param) {
   let data = $(param).data("id");
   let exp = data.split("~");

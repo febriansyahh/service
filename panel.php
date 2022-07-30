@@ -155,6 +155,15 @@ error_reporting(E_ALL ^ E_NOTICE);
               <div class="multi-level collapse " role="list" id="submenu-apps" aria-expanded="false">
                 <ul class="flex-column nav">
                   <li class="nav-item ">
+                    <a class="nav-link" href="?v=limit">
+                      <span class="sidebar-text">Limit Perhari</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="multi-level collapse " role="list" id="submenu-apps" aria-expanded="false">
+                <ul class="flex-column nav">
+                  <li class="nav-item ">
                     <a class="nav-link" href="?v=brand">
                       <span class="sidebar-text">Brand Motor</span>
                     </a>
@@ -503,6 +512,14 @@ error_reporting(E_ALL ^ E_NOTICE);
               include "panel/rekap/index.php";
               break;
 
+            case 'tambah_part':
+              include "panel/rekap/tambah_part.php";
+              break;
+
+            case 'ubah_part':
+              include "panel/rekap/ubah_part.php";
+              break;
+
             case 'rekapitulasi':
               include "panel/rekap/rekap.php";
               break;
@@ -517,6 +534,10 @@ error_reporting(E_ALL ^ E_NOTICE);
 
             case 'profile':
               include "panel/profile/index.php";
+              break;
+
+            case 'limit':
+              include "panel/profile/limit.php";
               break;
 
             case 'logout':
