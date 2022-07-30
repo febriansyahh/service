@@ -856,8 +856,6 @@ function getMemberinuser()
     return $query;
 }
 
-
-
 function insertUser()
 {
     global $con;
