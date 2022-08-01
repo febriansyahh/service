@@ -42,12 +42,23 @@ switch ($data_level) {
                                 <td><?= date('d-M-Y', strtotime($data['is_clear'])) ?></td>
                                 <td><?= 'Rp. ' . $data['total_perbaikan'] ?></td>
                                 <td>
-                                    <a href="?v=tambah_part&kode=<?php echo $data['id_perbaikan'] . "~" . $data['id_member'] . "~" . $data['id_brand'] ?>" class="btn btn-warning"><i class="fas fa-plus-square"></i> Tambah Part</a>
+                                    <a href="?v=tambah_part&kode=<?php echo $data['id_perbaikan'] . "~" . $data['id_member'] . "~" . $data['id_brand'] ?>" class="btn btn-warning"><i class="fas fa-plus-square"></i> Part</a>
                                 </td>
                                 <td>
                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#adakdjakd" onclick="detailPerbaikan(this)" data-id="<?php echo $data['id_perbaikan'] . "~" . $data['id_antrian'] . "~" . $data['id_member'] . "~" . $data['id_karyawan'] . "~" . $data['total_perbaikan'] . "~" . $data['is_clear'] . "~" . $data['is_input'] . "~" . $data['tanggal'] . "~" . $data['keluhan'] . "~" . $data['nama'] . "~" . $data['no_hp'] . "~" . $data['nm_motor']  . "~" . $data['karyawan']  ?>" class="btn btn-warning"><i class="fas fa-eye"></i></a>
                                     <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#adakdjakd" onclick="editableBooking(this)" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a> -->
                                     <a href="?v=rekap_edit&kode=<?php echo $data['id_perbaikan']; ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                                    <?php
+                                    if ($data['status_antri'] == '1') {
+                                        ?>
+                                        <a href="?v=rekap_aksi&clear=<?php echo $data['id_perbaikan'] ."~". $data['id_antrian']; ?>" class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>
+                                        <?php
+                                    }else{
+                                        ?>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-check"></i></a>
+                                        <?php
+                                    }
+                                    ?>
                                     <a href="?v=rekap_aksi&kode=<?php echo $data['id_perbaikan']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>

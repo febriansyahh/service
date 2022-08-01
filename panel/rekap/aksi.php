@@ -10,5 +10,8 @@ if (isset($_POST['btnSimpan'])) {
 } else {
     if (isset($_GET['kode'])) {
         deletePerbaikan($_GET['kode']);
+    }else if (isset($_GET['clear'])) {
+        $id = $_GET['clear'];
+        clearBook($id);
     }
 }

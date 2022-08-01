@@ -266,7 +266,7 @@ switch ($data_level) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" name="btnSelesai" class="btn btn-secondary">Selesai</button>
+                    <button type="submit" name="btnUbah" class="btn btn-secondary">Selesai</button>
                 </div>
             </form>
         </div>

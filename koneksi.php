@@ -674,15 +674,19 @@ function insertBooking()
 
 }
 
-function clearBook()
+function clearBook($id)
 {
     global $con;
+    $data = explode("~", $id);
+    $id_perbaikan = $data[0];
+    $id_antrian= $data[1];
+
     $date = date("Y-m-d H:i:s");
 
     $sql = "UPDATE `antrian` SET 
     `status` = '2',
     `clear_at` = '$date'
-    WHERE `id_antrian` = '" . $_POST['id'] . "' ";
+    WHERE `id_antrian` = '" . $id_antrian . "' ";
     $query_ubah = mysqli_query($con, $sql);
 
     if ($query_ubah) {
@@ -802,7 +806,7 @@ function profile()
 function rekap_service_admin()
 {
     global $con;
-    $sql = "SELECT  a.*, b.tanggal, b.keluhan, d.nama, d.no_hp, c.nm_motor, c.id_brand, e.nama FROM perbaikan a, antrian b, motor c, member d, karyawan e WHERE a.id_antrian=b.id_antrian AND b.id_motor=c.id_motor AND b.id_member=d.id_member AND  a.id_karyawan=e.id_karyawan";
+    $sql = "SELECT  a.*, b.id_antrian, b.tanggal, b.status AS status_antri, b.keluhan, d.nama, d.no_hp, c.nm_motor, c.id_brand, e.nama FROM perbaikan a, antrian b, motor c, member d, karyawan e WHERE a.id_antrian=b.id_antrian AND b.id_motor=c.id_motor AND b.id_member=d.id_member AND  a.id_karyawan=e.id_karyawan";
     $query = mysqli_query($con, $sql);
     return $query;
 }
