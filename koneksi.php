@@ -674,45 +674,56 @@ function insertBooking()
 
 }
 
-function clearBook($id)
-{
-    global $con;
-    $data = explode("~", $id);
-    $id_perbaikan = $data[0];
-    $id_antrian= $data[1];
+// function clearBook($id)
+// {
+//     global $con;
+//     $data = explode("~", $id);
+//     $id_perbaikan = $data[0];
+//     $id_antrian= $data[1];
+//     $id_member= $data[2];
 
-    $date = date("Y-m-d H:i:s");
+//     $date = date("Y-m-d H:i:s");
 
-    $sql = "UPDATE `antrian` SET 
-    `status` = '2',
-    `clear_at` = '$date'
-    WHERE `id_antrian` = '" . $id_antrian . "' ";
-    $query_ubah = mysqli_query($con, $sql);
+//     $sql = "UPDATE `antrian` SET 
+//     `status` = '2',
+//     `clear_at` = '$date'
+//     WHERE `id_antrian` = '" . $id_antrian . "' ";
+//     $query_ubah = mysqli_query($con, $sql);
 
-    if ($query_ubah) {
-        echo "<script>alert('Konfirmasi Berhasil')</script>";
-        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
-    } else {
-        echo "<script>alert('Konfirmasi Gagal')</script>";
-        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
-    }
-}
+//     if ($query_ubah) {
+//         echo "<script>alert('Konfirmasi Berhasil')</script>";
+//         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
+//     } else {
+//         echo "<script>alert('Konfirmasi Gagal')</script>";
+//         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
+//     }
+// }
 
-// function clearBook()
+// function clearBook($id)
 // {
 //     global $con;
 //     $date = date("Y-m-d H:i:s");
 
-//     $member = $_POST['member'];
-//     $id = $_POST['id'];
-//     $sql_no = "SELECT no_hp FROM member WHERE id_member = '$member'";
+//     $data = explode("~", $id);
+//     $id_perbaikan = $data[0];
+//     $id_antrian = $data[1];
+//     $id_member= $data[2];
+
+//     $sql_no = "SELECT no_hp FROM member WHERE id_member = '$id_member'";
 //     $query_no = mysqli_query($con, $sql_no);
 
-//     $cek = "SELECT * FROM `antrian` WHERE `id_member` = '$id'";
+//     // $cek = "SELECT * FROM `antrian` WHERE `id_antrian` = '$id_antrian'";
+//     $cek = "SELECT a.*, c.nm_brand, b.nm_motor, d.nama, e.total_perbaikan FROM antrian a, motor b, brand c, member d, perbaikan e WHERE a.id_motor=b.id_motor AND b.id_brand=c.id AND a.id_member=d.id_member AND e.id_member=d.id_member AND a.id_antrian = '$id_antrian'";
 //     $query = mysqli_query($con, $cek);
 //     $row = mysqli_fetch_row($query);
 
-//     $textt = "Kepada member bengkel Dandi Motor Jaya, antrian service motor anda dengan detail data :";
+//     $keluhan = $row[5];
+//     $brand = $row[9];
+//     $motor = $row[10];
+//     $nama = $row[11];
+//     $total = $row[12];
+
+//     $textt = "Kepada member bengkel Dandi Motor Jaya atas nama $nama, antrian service motor anda $brand $motor dengan keluhan perbaikan $keluhan. Total Perbaikan Rp.$total, terimakasih";
 //     $rplc = str_replace(' ', '%20', $textt);
 
 //     foreach ($query_no as $value) {
@@ -741,7 +752,7 @@ function clearBook($id)
 //             $sql = "UPDATE `antrian` SET 
 //             `status` = '2',
 //             `clear_at` = '$date'
-//             WHERE `id_antrian` = '" . $_POST['id'] . "' ";
+//             WHERE `id_antrian` = '" . $id_antrian . "' ";
 //             $query_ubah = mysqli_query($con, $sql);
 
 //             $query_validasi = mysqli_query($con, $query_ubah);

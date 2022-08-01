@@ -51,7 +51,7 @@ switch ($data_level) {
                                     <?php
                                     if ($data['status_antri'] == '1') {
                                         ?>
-                                        <a href="?v=rekap_aksi&clear=<?php echo $data['id_perbaikan'] ."~". $data['id_antrian']; ?>" class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>
+                                        <a href="?v=rekap_aksi&clear=<?php echo $data['id_perbaikan'] ."~". $data['id_antrian'] . "~" . $data['id_member']; ?>" class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>
                                         <?php
                                     }else{
                                         ?>
