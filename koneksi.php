@@ -674,30 +674,30 @@ function insertBooking()
 
 }
 
-// function clearBook($id)
-// {
-//     global $con;
-//     $data = explode("~", $id);
-//     $id_perbaikan = $data[0];
-//     $id_antrian= $data[1];
-//     $id_member= $data[2];
+function clearBook($id)
+{
+    global $con;
+    $data = explode("~", $id);
+    $id_perbaikan = $data[0];
+    $id_antrian= $data[1];
+    $id_member= $data[2];
 
-//     $date = date("Y-m-d H:i:s");
+    $date = date("Y-m-d H:i:s");
 
-//     $sql = "UPDATE `antrian` SET 
-//     `status` = '2',
-//     `clear_at` = '$date'
-//     WHERE `id_antrian` = '" . $id_antrian . "' ";
-//     $query_ubah = mysqli_query($con, $sql);
+    $sql = "UPDATE `antrian` SET 
+    `status` = '2',
+    `clear_at` = '$date'
+    WHERE `id_antrian` = '" . $id_antrian . "' ";
+    $query_ubah = mysqli_query($con, $sql);
 
-//     if ($query_ubah) {
-//         echo "<script>alert('Konfirmasi Berhasil')</script>";
-//         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
-//     } else {
-//         echo "<script>alert('Konfirmasi Gagal')</script>";
-//         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
-//     }
-// }
+    if ($query_ubah) {
+        echo "<script>alert('Konfirmasi Berhasil')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
+    } else {
+        echo "<script>alert('Konfirmasi Gagal')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=book'>";
+    }
+}
 
 // function clearBook($id)
 // {
@@ -827,7 +827,7 @@ function rekapservicemember()
     global $con;
     $id_member = $_SESSION["ses_id_person"];
 
-    $sql = "SELECT  a.*, b.tanggal, b.keluhan, d.nama, d.no_hp, c.nm_motor, e.nama FROM perbaikan a, antrian b, motor c, member d, karyawan e WHERE a.id_antrian=b.id_antrian AND b.id_motor=c.id_motor AND b.id_member=d.id_member AND a.id_karyawan=e.id_karyawan AND d.id_member = '$id_member'";
+    $sql = "SELECT  a.*, b.tanggal, b.keluhan, d.nama, d.no_hp, c.nm_motor, e.nama FROM perbaikan a, antrian b, motor c, member d, karyawan e WHERE a.id_antrian=b.id_antrian AND b.id_motor=c.id_motor AND b.id_member=d.id_member AND a.id_karyawan=e.id_karyawan AND b.status = '2' AND d.id_member = '$id_member'";
     $query = mysqli_query($con, $sql);
     return $query;
 }
