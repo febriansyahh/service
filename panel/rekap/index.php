@@ -40,9 +40,9 @@ switch ($data_level) {
                                 <!-- <td><?= $data['keluhan'] ?></td> -->
                                 <td><?= date('d-M-Y', strtotime($data['tanggal'])) ?></td>
                                 <td><?= date('d-M-Y', strtotime($data['is_clear'])) ?></td>
-                                <td><?= 'Rp. '. $data['total_perbaikan']?></td>
+                                <td><?= 'Rp. ' . $data['total_perbaikan'] ?></td>
                                 <td>
-                                    <a href="?v=tambah_part&kode=<?php echo $data['id_perbaikan'] ."~". $data['id_member'] ."~" . $data['id_brand'] ?>"  class="btn btn-warning"><i class="fas fa-plus-square"></i> Tambah Part</a>
+                                    <a href="?v=tambah_part&kode=<?php echo $data['id_perbaikan'] . "~" . $data['id_member'] . "~" . $data['id_brand'] ?>" class="btn btn-warning"><i class="fas fa-plus-square"></i> Tambah Part</a>
                                 </td>
                                 <td>
                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#adakdjakd" onclick="detailPerbaikan(this)" data-id="<?php echo $data['id_perbaikan'] . "~" . $data['id_antrian'] . "~" . $data['id_member'] . "~" . $data['id_karyawan'] . "~" . $data['total_perbaikan'] . "~" . $data['is_clear'] . "~" . $data['is_input'] . "~" . $data['tanggal'] . "~" . $data['keluhan'] . "~" . $data['nama'] . "~" . $data['no_hp'] . "~" . $data['nm_motor']  . "~" . $data['karyawan']  ?>" class="btn btn-warning"><i class="fas fa-eye"></i></a>
@@ -135,61 +135,32 @@ switch ($data_level) {
                 <h2 class="h6 modal-title">Detail Booking</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="?v=book_aksi" method="post" enctype="multipart/form-data">
+            <form>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">Member</label>
                         <input type="hidden" name="id" id="editId" class="form-control">
-                        <select class="form-select" name="member" id="editIdMember" aria-label="Default select example" required>
-                            <option selected>Pilih</option>
-                            <?php
-                            $a = member();
-                            foreach ($a as $key => $value) {
-                                echo "<option value='" . $value["id_member"] . "'>" . $value["nama"] . "</option>";
-                            }
-                            ?>
-                        </select>
+                        <input type="text" class="form-control" name="member" id="detNama" readonly>
                     </div>
 
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="">Brand Kendaraan</label>
-                                <select class="form-select" name="brand" id="editIdBrands" onchange="showBrandss(this.value)" aria-label="Default select example" required>
-                                    <option selected>Pilih</option>
-                                    <?php
-                                    $a = brand();
-                                    foreach ($a as $key => $value) {
-                                        echo "<option value='" . $value["id"] . "'>" . $value["nm_brand"] . "</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="">Kendaraan</label>
-                                <select class="form-select" name="motor" id="editIdMotors" aria-label="Default select example" required>
-                                    <option selected>Pilih</option>
-                                    <?php
-                                    $a = motor();
-                                    foreach ($a as $key => $value) {
-                                        echo "<option value='" . $value["id_motor"] . "'>" . $value["nm_motor"] . "</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="">Kendaraan</label>
+                        <input type="text" class="form-control" id="detMotor" readonly>
                     </div>
 
                     <div class="form-group">
                         <label for="">Tanggal Kedatangan</label>
-                        <input type="date" class="form-control" name="tanggal" id="editTanggal" required>
+                        <input type="date" class="form-control" name="tanggal" id="detTglDatang" readonly>
                     </div>
 
                     <div class="form-group">
                         <label for="">Keluhan</label>
-                        <textarea name="keluhan" cols="30" rows="3" id="editKeluhanBook" class="form-control"></textarea>
+                        <textarea name="keluhan" cols="30" rows="3" id="detKeluhan" class="form-control" readonly></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Total Biaya</label>
+                        <input type="text" class="form-control" id="detTotHarga" readonly>
                     </div>
 
                 </div>

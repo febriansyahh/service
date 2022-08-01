@@ -906,7 +906,7 @@ function updateUser()
     $sql = "UPDATE user SET 
     nama = '" . $_POST['nama'] . "',  
     username = '" . $_POST['username'] . "',  
-    actived = '" . $_POST['alamat'] . "'
+    actived = '" . $_POST['actived'] . "'
     WHERE id_user = '" . $_POST['id'] . "' ";
     $query_ubah = mysqli_query($con, $sql);
 
@@ -922,19 +922,25 @@ function updateUser()
 function resetPassword()
 {
     global $con;
+    $password_old = md5($_POST['pass_old']);
     $password = md5($_POST['password']);
 
-    $sql = "UPDATE `user` SET 
-    `password` = '" . $password . "'
-    WHERE `id_user` = '" . $_POST['id'] . "' ";
-    $query_ubah = mysqli_query($con, $sql);
+    if ($password == $password_old) {
+        echo "<script>alert('Reset Password Gagal, Password Masih Sama')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=user'>";
+    }else{
+        $sql = "UPDATE `user` SET 
+        `password` = '" . $password . "'
+        WHERE `id_user` = '" . $_POST['id'] . "' ";
+        $query_ubah = mysqli_query($con, $sql);
 
-    if ($query_ubah) {
-        echo "<script>alert('Ubah Berhasil')</script>";
-        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=user'>";
-    } else {
-        echo "<script>alert('Ubah Gagal')</script>";
-        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=user'>";
+        if ($query_ubah) {
+            echo "<script>alert('Ubah Berhasil')</script>";
+            echo "<meta http-equiv='refresh' content='0; url=panel.php?v=user'>";
+        } else {
+            echo "<script>alert('Ubah Gagal')</script>";
+            echo "<meta http-equiv='refresh' content='0; url=panel.php?v=user'>";
+        }
     }
 }
 

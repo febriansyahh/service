@@ -225,5 +225,28 @@ function showMember(str) {
 
 }
 
+function editablePass(param) {
+  let data = $(param).data("id");
+  let exp = data.split("~");
+  console.log(data);
+  $("#resId").val(exp[0]);
+  $("#resNama").val(exp[1]);
+  $("#resUsername").val(exp[2]);
+  $("#resPass").val(exp[3]);
+  $("#resActived").val(exp[4]);
+}
+
+function editableUser(param) {
+  let data = $(param).data("id");
+  let exp = data.split("~");
+  console.log(data);
+  $("#editId").val(exp[0]);
+  $("#editIdPerson").val(exp[1]);
+  $("#editNama").val(exp[2]);
+  $("#editUsername").val(exp[3]);
+  $("#editPassword").val(exp[4]);
+  $("#editActived").val(exp[5]);
+}
+
 
 

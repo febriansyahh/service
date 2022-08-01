@@ -49,7 +49,7 @@ include_once("koneksi.php");
                         <td><?= date('d-m-Y', strtotime($data['registered'])) ?></td>
                         <td>
                             <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editPass" onclick="editablePass(this)" data-id="<?php echo $data['id_user'] . "~" . $data['nama'] . "~" . $data['username'] . "~" . $data['password'] . "~" . $data['actived']  ?>" class="btn btn-danger btn-sm"><i class="fas fa-key"></i> Reset</a>
-                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editMember" onclick="editableMember(this)" data-id="<?php echo $data['id_member'] . "~" . $data['nama'] . "~" . $data['username'] . "~" . $data['password'] . "~" . $data['actived']  ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editMember" onclick="editableUser(this)" data-id="<?php echo $data['id_user'] . "~" . $data['id_person'] . "~" . $data['nama'] . "~" . $data['username'] . "~" . $data['password'] . "~" . $data['actived']  ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i> Ubah</a>
                             <a href="?v=user_aksi&kode=<?php echo $data['id_user']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i> Hapus</a>
                         </td>
                     </tr>
@@ -126,13 +126,19 @@ include_once("koneksi.php");
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="">Nama Pengguna</label>
-                            <input type="hidden" name="id" id="resId" class="form-control" placeholder="Rute">
-                            <input type="text" name="nama" id="resNm" class="form-control" readonly>
+                            <input type="hidden" name="id" id="resId" class="form-control">
+                            <input type="hidden" name="pass_old" id="resPass" class="form-control">
+                            <input type="text" name="nama" id="resNama" class="form-control" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Username</label>
+                            <input type="text" name="username" id="resUsername" class="form-control" readonly>
                         </div>
 
                         <div class="form-group">
                             <label for="">Password</label>
-                            <input type="password" name="password" id="resPass" class="form-control">
+                            <input type="password" name="password" class="form-control">
                         </div>
 
                     </div>
@@ -157,17 +163,18 @@ include_once("koneksi.php");
                         <div class="form-group">
                             <label for="">Nama Pengguna</label>
                             <input type="hidden" name="id" id="editId" class="form-control">
-                            <input type="text" name="nama" id="editNm" class="form-control">
+                            <input type="hidden" name="id_person" id="editIdPerson" class="form-control">
+                            <input type="text" name="nama" id="editNama" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="">Username</label>
-                            <input type="text" name="username" id="editusername" class="form-control">
+                            <input type="text" name="username" id="editUsername" class="form-control">
                         </div>
 
                         <div class="form-group">
                             <label for="">Status Aktif</label>
-                            <select name="actived" id="editactived" class="form-control">
+                            <select name="actived" id="editActived" class="form-control">
                                 <option value="1">Aktif</option>
                                 <option value="0">Non Aktif</option>
                             </select>

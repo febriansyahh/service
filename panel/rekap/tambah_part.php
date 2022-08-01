@@ -31,10 +31,8 @@ $brand = $data[2];
                     <div class="col-md-4">
                         <div class="input-group mb-3">
                             <label for=""><?= $value['nm_part'] ?> &nbsp;</label>
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <input type="checkbox" aria-label="Checkbox for following text input">
-                                </div>
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" value="" name="is_check" aria-label="Checkbox for following text input">
                             </div>
                             <input type="hidden" class="form-control" name="is_part[]" value="<?= $value['id_part']  ?>">
                             <input type="hidden" class="form-control" name="harga[]" value="<?= $value['harga'] ?>">

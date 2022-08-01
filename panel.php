@@ -63,6 +63,7 @@ error_reporting(E_ALL ^ E_NOTICE);
   <link type="text/css" href="ass/css/volt.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
   <!-- datatables bootstrap 5-->
   <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"> -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
@@ -599,38 +600,40 @@ error_reporting(E_ALL ^ E_NOTICE);
 
   <!-- Moment JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-
-  <!-- Vanilla JS Datepicker -->
-  <script src="ass/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
-
-  <!-- Notyf -->
-  <script src="ass/vendor/notyf/notyf.min.js"></script>
-
-  <!-- Simplebar -->
-  <script src="ass/vendor/simplebar/dist/simplebar.min.js"></script>
-
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-  <!-- Volt JS -->
-  <script src="ass/assets/js/volt.js"></script>
-
-  <!-- Swetalert -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
-
-  <script>
-    $(document).ready(function() {
-      $('#example').DataTable();
-    });
+</body>
 
 
-    document.getElementById('basicAlert').addEventListener('click', function() {
-      Swal.fire(
-        'Basic alert',
-        'You clicked the button!'
-      )
-    });
-  </script>
+<!-- Vanilla JS Datepicker -->
+<script src="ass/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+
+<!-- Notyf -->
+<script src="ass/vendor/notyf/notyf.min.js"></script>
+
+<!-- Simplebar -->
+<script src="ass/vendor/simplebar/dist/simplebar.min.js"></script>
+
+<!-- Github buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- Volt JS -->
+<script src="ass/assets/js/volt.js"></script>
+
+<!-- Swetalert -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable();
+  });
+
+
+  document.getElementById('basicAlert').addEventListener('click', function() {
+    Swal.fire(
+      'Basic alert',
+      'You clicked the button!'
+    )
+  });
+</script>
 
 
 </body>
