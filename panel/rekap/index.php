@@ -50,13 +50,13 @@ switch ($data_level) {
                                     <a href="?v=rekap_edit&kode=<?php echo $data['id_perbaikan']; ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
                                     <?php
                                     if ($data['status_antri'] == '1') {
-                                        ?>
-                                        <a href="?v=rekap_aksi&clear=<?php echo $data['id_perbaikan'] ."~". $data['id_antrian'] . "~" . $data['id_member']; ?>" class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>
-                                        <?php
-                                    }else{
-                                        ?>
+                                    ?>
+                                        <a href="?v=rekap_aksi&clear=<?php echo $data['id_perbaikan'] . "~" . $data['id_antrian'] . "~" . $data['id_member']; ?>" class="btn btn-success btn-sm"><i class="fa fa-check"></i></a>
+                                    <?php
+                                    } else {
+                                    ?>
                                         <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-check"></i></a>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                     <a href="?v=rekap_aksi&kode=<?php echo $data['id_perbaikan']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" class='btn btn-danger btn-sm'><i class="fa fa-trash"></i></a>
@@ -146,11 +146,13 @@ switch ($data_level) {
                 <h2 class="h6 modal-title">Detail Booking</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form>
+            <form action="?v=rekap_aksi" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">Member</label>
-                        <input type="hidden" name="id" id="editId" class="form-control">
+                        <input type="hidden" name="id" id="detIdPerbaikan" class="form-control">
+                        <input type="hidden" name="id_antri" id="detIdAntrian" class="form-control">
+                        <input type="hidden" name="id_member" id="detIdMember" class="form-control">
                         <input type="text" class="form-control" name="member" id="detNama" readonly>
                     </div>
 
@@ -177,7 +179,7 @@ switch ($data_level) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" name="btnSelesai" class="btn btn-secondary">Selesai</button>
+                    <button type="submit" name="btnCetak" class="btn btn-secondary">Cetak Slip</button>
                 </div>
             </form>
         </div>
