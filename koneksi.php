@@ -1000,6 +1000,7 @@ function insertPerbaikan()
         $jml = $c[$i];
         $res =(int)$hrg * (int)$jml;
 
+
         $sqlpart = "INSERT INTO `part_perbaikan`(`id_perbaikan`,`id_part`,`jumlah`, `harga`) VALUES (
         '" . $idp . "',
         '" . $part . "',
@@ -1009,7 +1010,12 @@ function insertPerbaikan()
 
         mysqli_query($con, $sqlpart);
 
+        
+
     }
+
+    $sqldel = "DELETE FROM `part_perbaikan` WHERE `id_perbaikan` = '$idp' AND `jumlah` = '0' ";
+    mysqli_query($con, $sqldel);
     
     $count = "SELECT sum(`jumlah`*`harga`) as `total` FROM `part_perbaikan` WHERE `id_perbaikan` = '$idp' GROUP BY `id_perbaikan`;";
     $hrg = mysqli_query($con, $count);
@@ -1120,4 +1126,20 @@ function deletePerbaikan($id)
         echo "<script>alert('Data Rekap Perbaikan Gagal Dihapus !')</script>";
         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
     }
+}
+
+function rekapedit($id)
+{
+    global $con;
+    $sql = "SELECT a.*, b.nama, c.nama AS nama_kar FROM perbaikan a LEFT JOIN member b ON a.id_member=b.id_member LEFT JOIN karyawan c ON a.id_karyawan=c.id_karyawan WHERE a.id_perbaikan = '$id'";
+    $query = mysqli_query($con, $sql);
+    return $query;
+}
+
+function editpart($id)
+{
+    global $con;
+    $sql = "SELECT a.*, b.nm_part FROM `part_perbaikan` a, spare_part b WHERE a.id_part=b.id_part AND  a.`id_perbaikan` = '$id' ORDER BY b.nm_part ASC";
+    $query = mysqli_query($con, $sql);
+    return $query;
 }

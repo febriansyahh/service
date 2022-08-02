@@ -532,6 +532,10 @@ error_reporting(E_ALL ^ E_NOTICE);
               include "panel/rekap/rekap.php";
               break;
 
+            case 'rekapedit':
+              include "panel/rekap/edit.php";
+              break;
+
             case 'rekap_aksi':
               include "panel/rekap/aksi.php";
               break;
