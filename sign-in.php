@@ -66,7 +66,7 @@ if (isset($_POST['btnLogin'])) LoginUser();
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                             <div class="text-center text-md-center mb-4 mt-md-0">
-                                <img src="assets/img/group.png" height="75" width="auto" alt="logo" />
+                                <img src="assets/img/groupe.png" height="75" width="auto" alt="logo" />
                             </div>
                             <form action="" class="mt-4" method="post">
                                 <!-- Form -->

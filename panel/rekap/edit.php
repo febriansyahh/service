@@ -23,6 +23,7 @@ $id = $_GET['kode'];
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Nama Member</label>
+                                <input type="hidden" class="form-control" name="id_perbaikan" value="<?= $value['id_perbaikan'] ?>" readonly>
                                 <input type="text" class="form-control" name="member" value="<?= $value['nama'] ?>" readonly>
                             </div>
                         </div>
@@ -55,6 +56,7 @@ $id = $_GET['kode'];
                                     </div>
                                     <div class="col-md-9">
                                         <div class="form-group">
+                                            <input type="hidden" class="form-control" name="id[]" value="<?= $value['id']  ?>">
                                             <input type="hidden" class="form-control" name="is_part[]" value="<?= $value['id_part']  ?>">
                                             <input type="hidden" class="form-control" name="harga[]" value="<?= $value['harga'] ?>">
                                             <input type="text" name="jumlah[]" class="form-control" value="<?= $value['jumlah'] ?>" size="20">

@@ -2,7 +2,7 @@
 define('HOST', 'localhost');
 define('USER', 'root');
 define('PASS', '');
-define('DB', 'bengkel');
+define('DB', 'service');
 
 define('SITE_ROOT', realpath(dirname(__FILE__)));
 
@@ -12,8 +12,10 @@ function Registrasi()
 {
     global $con;
 
+    // $idperson = "SELECT `AUTO_INCREMENT` as id_member FROM INFORMATION_SCHEMA.TABLES
+    // WHERE TABLE_SCHEMA = 'bengkel' AND TABLE_NAME = 'member' ";
     $idperson = "SELECT `AUTO_INCREMENT` as id_member FROM INFORMATION_SCHEMA.TABLES
-    WHERE TABLE_SCHEMA = 'bengkel' AND TABLE_NAME = 'member' ";
+    WHERE TABLE_SCHEMA = 'service' AND TABLE_NAME = 'member' ";
     $querys = mysqli_query($con, $idperson);
     $rows = mysqli_fetch_row($querys);
     $idmember = $rows[0];
@@ -355,7 +357,7 @@ function insertMember()
     $date = date("Y-m-d H:i:s");
 
     $idperson = "SELECT `AUTO_INCREMENT` as id_member FROM INFORMATION_SCHEMA.TABLES
-    WHERE TABLE_SCHEMA = 'bengkel' AND TABLE_NAME = 'member' ";
+    WHERE TABLE_SCHEMA = 'service' AND TABLE_NAME = 'member' ";
     $querys = mysqli_query($con, $idperson);
     $rows = mysqli_fetch_row($querys);
     $idmember = $rows[0];
@@ -980,7 +982,7 @@ function insertPerbaikan()
     global $con;
 
     $idperbaikan = "SELECT `AUTO_INCREMENT` as id_perbaikan FROM INFORMATION_SCHEMA.TABLES
-    WHERE TABLE_SCHEMA = 'bengkel' AND TABLE_NAME = 'perbaikan' ";
+    WHERE TABLE_SCHEMA = 'service' AND TABLE_NAME = 'perbaikan' ";
     $querys = mysqli_query($con, $idperbaikan);
     $rows = mysqli_fetch_row($querys);
     $idp = $rows[0];
@@ -1142,4 +1144,52 @@ function editpart($id)
     $sql = "SELECT a.*, b.nm_part FROM `part_perbaikan` a, spare_part b WHERE a.id_part=b.id_part AND  a.`id_perbaikan` = '$id' ORDER BY b.nm_part ASC";
     $query = mysqli_query($con, $sql);
     return $query;
+}
+
+function updateRekap()
+{
+    global $con;
+    $idp = $_POST['id_perbaikan'];
+    $a = $_POST['is_part'];
+
+    $cp = count($a);
+
+    for ($i = 0; $i < $cp; $i++) {
+        $id = $_POST['id'];
+        $a = $_POST['is_part'];
+        $b = $_POST['harga'];
+        $c = $_POST['jumlah'];
+
+        $id = $id[$i];
+        $part = $a[$i];
+        $hrg = $b[$i];
+        $jml = $c[$i];
+        $res = (int)$hrg * (int)$jml;
+
+        $sqlpart = "UPDATE `part_perbaikan` SET 
+        `jumlah` =  '" . $jml . "'
+        WHERE `id` = '" . $id . "' ";
+
+        mysqli_query($con, $sqlpart);
+    }
+
+    $count = "SELECT sum(`jumlah`*`harga`) as `total` FROM `part_perbaikan` WHERE `id_perbaikan` = '$idp' GROUP BY `id_perbaikan`;";
+    $hrg = mysqli_query($con, $count);
+    $res = mysqli_fetch_row($hrg);
+    $total = $res[0];
+
+
+    $sqlperbaikan = "UPDATE `perbaikan` SET 
+    `total_perbaikan` =  '" . $total . "'
+    WHERE `id_perbaikan` = '" . $_POST['id_perbaikan'] . "' ";
+
+    $query = mysqli_query($con, $sqlperbaikan);
+
+    if ($query) {
+        echo "<script>alert('Rekap Perbaikan Berhasil Diperbarui !')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
+    } else {
+        echo "<script>alert('Rekap Perbaikan Gagal Diperbarui !')</script>";
+        echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
+    }
 }

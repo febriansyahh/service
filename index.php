@@ -48,7 +48,7 @@ if (isset($_POST['btnRegistrasi'])) Registrasi();
   <!-- ===============================================-->
   <main class="main" id="c">
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" data-navbar-on-scroll="data-navbar-on-scroll">
-      <div class="container"><a class="navbar-brand" href="#home"><img src="assets/img/groupp.png" height="75" width="auto" alt="logo" /></a>
+      <div class="container"><a class="navbar-brand" href="#home"><img src="assets/img/groupe.png" height="75" width="auto" alt="logo" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
         <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto">
@@ -299,7 +299,7 @@ if (isset($_POST['btnRegistrasi'])) Registrasi();
   <!-- ===============================================-->
   <!--    JavaScripts-->
   <!-- ===============================================-->
-  
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"></script>
