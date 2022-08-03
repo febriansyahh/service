@@ -1,6 +1,6 @@
 <?php
 
-$con = new mysqli("localhost", "root", "", "bengkel");
+$con = new mysqli("localhost", "root", "", "service");
 if ($con->connect_error) {
     exit('Could not connect');
 }

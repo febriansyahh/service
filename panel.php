@@ -536,6 +536,10 @@ error_reporting(E_ALL ^ E_NOTICE);
               include "panel/rekap/edit.php";
               break;
 
+            case 'cetakslip':
+              include "panel/rekap/slip.php";
+              break;
+
             case 'rekap_aksi':
               include "panel/rekap/aksi.php";
               break;

@@ -147,7 +147,7 @@ switch ($data_level) {
                 <h2 class="h6 modal-title">Detail Booking</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="?v=rekap_aksi" method="post" enctype="multipart/form-data">
+            <form action="panel/rekap/slip.php" method="post" enctype="multipart/form-data" target="_blank">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">Member</label>
@@ -180,6 +180,7 @@ switch ($data_level) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
+                    <!-- <a href="panel/rekap/slip.php" class="btn btn-secondary">Cetak Slip</a> -->
                     <button type="submit" name="btnCetak" class="btn btn-secondary">Cetak Slip</button>
                 </div>
             </form>

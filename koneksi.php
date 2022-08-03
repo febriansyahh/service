@@ -3,6 +3,7 @@ define('HOST', 'localhost');
 define('USER', 'root');
 define('PASS', '');
 define('DB', 'service');
+// define('DB', 'bengkel');
 
 define('SITE_ROOT', realpath(dirname(__FILE__)));
 
@@ -13,7 +14,7 @@ function Registrasi()
     global $con;
 
     // $idperson = "SELECT `AUTO_INCREMENT` as id_member FROM INFORMATION_SCHEMA.TABLES
-    // WHERE TABLE_SCHEMA = 'bengkel' AND TABLE_NAME = 'member' ";
+    // WHERE TABLE_SCHEMA = 'service' AND TABLE_NAME = 'member' ";
     $idperson = "SELECT `AUTO_INCREMENT` as id_member FROM INFORMATION_SCHEMA.TABLES
     WHERE TABLE_SCHEMA = 'service' AND TABLE_NAME = 'member' ";
     $querys = mysqli_query($con, $idperson);
@@ -1192,4 +1193,21 @@ function updateRekap()
         echo "<script>alert('Rekap Perbaikan Gagal Diperbarui !')</script>";
         echo "<meta http-equiv='refresh' content='0; url=panel.php?v=rekap'>";
     }
+}
+
+
+function dataslip($id)
+{
+    global $con;
+    $sql = "SELECT a.*, b.nama, b.alamat, b.no_hp, c.nama AS nama_kar, d.tanggal AS tgl_datang, d.keluhan, e.nm_motor FROM perbaikan a LEFT JOIN member b ON a.id_member=b.id_member LEFT JOIN karyawan c ON a.id_karyawan=c.id_karyawan LEFT JOIN antrian d ON a.id_antrian=d.id_antrian LEFT JOIN motor e ON d.id_motor=e.id_motor WHERE a.id_perbaikan = '$id'";
+    $query = mysqli_query($con, $sql);
+    return $query;
+}
+
+function slippart($id)
+{
+    global $con;
+    $sql = "SELECT a.*, b.nm_part FROM `part_perbaikan` a, spare_part b WHERE a.id_part=b.id_part AND  a.`id_perbaikan` = '$id' ORDER BY b.nm_part ASC";
+    $query = mysqli_query($con, $sql);
+    return $query;
 }
