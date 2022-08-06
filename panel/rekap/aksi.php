@@ -6,7 +6,7 @@ if (isset($_POST['btnSimpan'])) {
 } elseif (isset($_POST['btnTambah'])) {
     tambahPart();
 } elseif (isset($_POST['btnUbah'])) {
-    updateBook();
+    updateRekap();
 } else {
     if (isset($_GET['kode'])) {
         deletePerbaikan($_GET['kode']);

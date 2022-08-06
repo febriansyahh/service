@@ -47,7 +47,7 @@ switch ($data_level) {
                                 <td>
                                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#adakdjakd" onclick="detailPerbaikan(this)" data-id="<?php echo $data['id_perbaikan'] . "~" . $data['id_antrian'] . "~" . $data['id_member'] . "~" . $data['id_karyawan'] . "~" . $data['total_perbaikan'] . "~" . $data['is_clear'] . "~" . $data['is_input'] . "~" . $data['tanggal'] . "~" . $data['keluhan'] . "~" . $data['nama'] . "~" . $data['no_hp'] . "~" . $data['nm_motor']  . "~" . $data['karyawan']  ?>" class="btn btn-warning"><i class="fas fa-eye"></i></a>
                                     <!-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#adakdjakd" onclick="editableBooking(this)" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a> -->
-                                    <!-- <a href="?v=rekapedit&kode=<?php echo $data['id_perbaikan']; ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a> -->
+                                    <a href="?v=rekapedit&kode=<?php echo $data['id_perbaikan']; ?>" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
                                     <!-- <a href="?v=rekapedit" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a> -->
                                     <?php
                                     if ($data['status_antri'] == '1') {

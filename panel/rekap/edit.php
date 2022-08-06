@@ -72,6 +72,10 @@ $id = $_GET['kode'];
                     ?>
                 </div>
             </div>
+            <div class="modal-footer">
+                <a href="?v=rekap" class="btn btn-primary">Kembali</a>
+                <button type="submit" name="btnUbah" class="btn btn-secondary">Update</button>
+            </div>
         </form>
     </div>
 </div>
