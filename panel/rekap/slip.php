@@ -163,7 +163,6 @@ foreach ($a as $key => $value) {
 
                 <tr>
                     <th align="left">
-                        -->
                         <li>CV. Trijaya Motor <br> Jl. Lkr. Utara UMK Gg. 11, Kepyar, Dersalam <br> 082 226 278 896</li>
 
                     </th>
