@@ -151,20 +151,20 @@ foreach ($a as $key => $value) {
                 <tr>
                     <th width="800px" align="left">
                         <br>
-                        <label>• Terima kasih sudah melakukan service kendaraan kepada kami</label> <br><br>
-
-                        <label>• Jika informasi pada bukti pembayaran ini ada
-                            kesalahan, silahkan hubungi kami
-                        </label> <br><br>
+                        <ul>
+                            <li>Terima kasih sudah melakukan service kendaraan kepada kami</li>
+                            <li>Jika informasi pada bukti pembayaran ini ada
+                                kesalahan, silahkan hubungi kami</li>
+                        </ul>
+                        <br><br>
                     </th>
 
                 </tr>
 
                 <tr>
                     <th align="left">
-                        <font size="2"> CV. Trijaya Motor </font><br>
-                        <font size="2"> Jl. Lkr. Utara UMK Gg. 11, Kepyar, Dersalam </font> <br>
-                        <font size="2"> 082 226 278 896 </font><br>
+                        -->
+                        <li>CV. Trijaya Motor <br> Jl. Lkr. Utara UMK Gg. 11, Kepyar, Dersalam <br> 082 226 278 896</li>
 
                     </th>
                     <th width="200px" align="left">
@@ -172,7 +172,7 @@ foreach ($a as $key => $value) {
                         <hr width="80%" align="left">
                     </th>
                     <th width="200px" align="right">
-                      Rp. <?php echo $total?>
+                        Rp. <?php echo $total ?>
                         <hr width="80%" align="right">
                     </th>
                 </tr>
