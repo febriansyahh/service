@@ -237,7 +237,7 @@ if (isset($_POST['btnRegistrasi'])) Registrasi();
                   <label for="">No Handphone<span class="text-danger">*</span></label>
                 </div>
                 <div class="col-8">
-                  <input type="text" class="form-control col-lg-4" name="no_hp" placeholder="" required>
+                  <input type="text" class="form-control col-lg-4" name="no_hp" placeholder="6289854xxxxx" required>
                 </div>
               </div>
               <br><br>

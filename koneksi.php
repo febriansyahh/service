@@ -1211,3 +1211,27 @@ function slippart($id)
     $query = mysqli_query($con, $sql);
     return $query;
 }
+
+function lmember($tga, $tgak)
+{
+    global $con;
+    if ($tga !='' && $tgak !='') {
+        $sql = "SELECT * FROM `member` WHERE `registered` BETWEEN '$tga' AND '$tgak' ORDER BY `nama` ASC ";
+    }else{
+        $sql = "SELECT * FROM `member` WHERE `registered` ORDER BY `nama` ASC ";
+    }
+    $query = mysqli_query($con, $sql);
+    return $query;
+}
+
+function lrekap($tga, $tgr)
+{
+    global $con;
+    if ($tga != '' && $tgr != '') {
+    $sql = "SELECT  a.*, b.id_antrian, b.tanggal, b.status AS status_antri, b.keluhan, d.nama, d.no_hp, c.nm_motor, c.id_brand, e.nama FROM perbaikan a, antrian b, motor c, member d, karyawan e WHERE a.id_antrian=b.id_antrian AND b.id_motor=c.id_motor AND b.id_member=d.id_member AND a.id_karyawan=e.id_karyawan AND a.is_clear BETWEEN '$tga' AND '$tgr' ";
+    }else{
+        $sql = "SELECT  a.*, b.id_antrian, b.tanggal, b.status AS status_antri, b.keluhan, d.nama, d.no_hp, c.nm_motor, c.id_brand, e.nama FROM perbaikan a, antrian b, motor c, member d, karyawan e WHERE a.id_antrian=b.id_antrian AND b.id_motor=c.id_motor AND b.id_member=d.id_member AND a.id_karyawan=e.id_karyawan";
+    }
+    $query = mysqli_query($con, $sql);
+    return $query;
+}

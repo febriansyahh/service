@@ -66,7 +66,7 @@ if (isset($_POST['btnUbah'])) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="h6 modal-title">Edit Data Kendaraan</h2>
+                    <h2 class="h6 modal-title">Edit Limit Service Perhari</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="post" enctype="multipart/form-data">
