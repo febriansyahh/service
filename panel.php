@@ -127,9 +127,9 @@ error_reporting(E_ALL ^ E_NOTICE);
             <li class="nav-item">
               <a href="panel.php" class="nav-link d-flex align-items-center">
                 <span class="sidebar-icon">
-                  <img src="ass/assets/img/brand/light.svg" height="20" width="20" alt="Volt Logo">
+                  <img src="assets/img/groupe.png" height="60" width="auto" alt="Trijaya Logo">
                 </span>
-                <span class="mt-1 ms-1 sidebar-text">Booking Service</span>
+                <!-- <span class="mt-1 ms-1 sidebar-text"><b>CV. Trijaya Motor</b></span> -->
               </a>
             </li>
             <li class="nav-item active ">
@@ -222,9 +222,9 @@ error_reporting(E_ALL ^ E_NOTICE);
             <li class="nav-item">
               <a href="panel.php" class="nav-link d-flex align-items-center">
                 <span class="sidebar-icon">
-                  <img src="ass/assets/img/brand/light.svg" height="20" width="20" alt="Volt Logo">
+                  <img src="assets/img/groupe.png" height="60" width="auto" alt="Trijaya Logo">
                 </span>
-                <span class="mt-1 ms-1 sidebar-text">Booking Service</span>
+                <!-- <span class="mt-1 ms-1 sidebar-text"><b>CV. Trijaya Motors</b></span> -->
               </a>
             </li>
             <li class="nav-item active ">
@@ -392,9 +392,9 @@ error_reporting(E_ALL ^ E_NOTICE);
             <li class="nav-item">
               <a href="panel.php" class="nav-link d-flex align-items-center">
                 <span class="sidebar-icon">
-                  <img src="ass/assets/img/brand/light.svg" height="20" width="20" alt="Volt Logo">
+                  <img src="assets/img/groupe.png" height="60" width="auto" alt="Trijaya Logo">
                 </span>
-                <span class="mt-1 ms-1 sidebar-text">Booking Service</span>
+                <!-- <span class="mt-1 ms-1 sidebar-text"><b>CV. Trijaya Motor</b></span> -->
               </a>
             </li>
             <li class="nav-item active ">

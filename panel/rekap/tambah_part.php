@@ -45,7 +45,7 @@ $brand = $data[2];
             </div>
 
             <div class="modal-footer mt-3">
-                <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Tutup</button>
+                <a href="?v=rekap" class="btn btn-primary">Kembali</a>
                 <button type="submit" name="btnTambah" class="btn btn-secondary">Tambah</button>
             </div>
         </form>
